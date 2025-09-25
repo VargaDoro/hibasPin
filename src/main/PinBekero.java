@@ -111,24 +111,7 @@ public class PinBekero extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for (int i = 0; i < jPanel1.getComponentCount(); i++) {
-            JButton btn = (JButton) jPanel1.getComponent(i);
-            btn.setText(i + "");
-            btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (kattDb <= 4) {
-                        kattDb++;
-                        pin += e.getActionCommand();
-                    } 
-                    if(kattDb == 4) {
-                        chbMutat.setEnabled(true);
-                        JOptionPane.showMessageDialog(rootPane, "Pin mentve!");
-                    }
-                    
-                }
-            });
-        }
+        hozzaadGomb();
     }//GEN-LAST:event_formWindowOpened
 
     private void chbMutatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbMutatActionPerformed
@@ -147,6 +130,25 @@ public class PinBekero extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_chbMutatActionPerformed
 
+    private void hozzaadGomb(){
+        for (int i = 0; i < jPanel1.getComponentCount(); i++) {
+            JButton btn = (JButton) jPanel1.getComponent(i);
+            btn.setText(String.valueOf(i));
+            btn.addActionListener(this::gombKattintas);
+        }
+    }
+    
+    private void gombKattintas(ActionEvent e) {
+        if (kattDb <= 4) {
+            kattDb++;
+            pin += e.getActionCommand();
+        } 
+        if(kattDb == 4) {
+            chbMutat.setEnabled(true);
+            JOptionPane.showMessageDialog(rootPane, "Pin mentve!");
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -193,4 +195,5 @@ public class PinBekero extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
 }
