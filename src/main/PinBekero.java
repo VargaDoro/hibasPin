@@ -3,6 +3,10 @@ package main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -140,6 +144,8 @@ public class PinBekero extends javax.swing.JFrame {
         if(kattDb == 4) {
             chbMutat.setEnabled(true);
             JOptionPane.showMessageDialog(rootPane, "Pin mentve!");
+            mentesFileaba(pin);
+            JOptionPane.showMessageDialog(rootPane, "Pin mentve!");
         }
     }
 
@@ -147,6 +153,17 @@ public class PinBekero extends javax.swing.JFrame {
         for (int i = 0; i < pin.length(); i++) {
             int gomb = Integer.parseInt(pin.charAt(i)+"");
             jPanel1.getComponent(gomb).setBackground(szin);
+        }
+    }
+    
+    private void mentesFileaba(String pin){
+        try {
+            Path path = Path.of("pin.txt");
+            Files.write(path, List.of(pin));
+            System.out.println("Pin kód sikeresen mentve!");
+        } catch (IOException e) {
+            System.out.println("Hiba történt a fájl mentése során.");
+            e.printStackTrace();
         }
     }
     
